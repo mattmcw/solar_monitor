@@ -36,6 +36,10 @@ timestamp () {
 	echo "${ts}"
 }
 
+celsius2farenheit () {
+	echo "scale=2;(${1} × 9/5) + 32" | bc
+}
+
 col () {
 	c=`echo "${2}" | awk -F',' '{ print $'${1}' }'`
 	c=${c//[$'\t\r\n']}
