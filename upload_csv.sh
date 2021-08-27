@@ -2,13 +2,6 @@
 
 source ./common.sh
 
-upload () {
-	curl \
-		-A "${PI_UA}" \
-		-H "Content-Type: application/gzip" \
-		--data-binary "@tmp/upload.csv.gz" \
-		${@}
-}
+FILEPATH=`pwd "${1}"`
 
-mkdir -p tmp
-cp "${1}" "tmp/upload.csv.gz"
+scp "${FILEPATH}" ${REMOTE}:~/csv/

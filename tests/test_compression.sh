@@ -4,7 +4,16 @@ source ./common.sh
 
 mkdir -p tmp
 
-cp example/* tmp/
+#cp example/* tmp/
+
+for day in $(seq 0 30); do
+	if [ "$(uname)" == "Darwin" ]; then
+		datetime=`TZ=$TZ date -j -v "+${day}d" "+%F"`
+	elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+		datetime=`TZ=$TZ date -d "+${day} day" "+%F"`
+	fi
+	bash generate_csv.sh "${datetime}" "./tmp/${datetime}.csv"
+done
 
 perc () {
 	p=`echo "scale=2;(${2}/${1})*100" | bc`
@@ -43,3 +52,5 @@ for i in "./tmp/"*.csv ; do
 	remove_date "${i}.noheaderquote" > "${i}.${name}"
 	testmethod "${i}" "${name}"
 done
+
+rm -rf tmp
