@@ -16,7 +16,7 @@
 # 1000 °C	1832.0 °F	
 
 
-source ./common.sh
+source ./src/common.sh
 
 CELSIUS=(
 

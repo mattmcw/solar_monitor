@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 if [ ! -d data ]; then
 	mkdir -p data

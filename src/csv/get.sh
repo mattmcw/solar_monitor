@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 COOKIES=`mktemp`
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
@@ -29,11 +29,15 @@ login () {
 response=`login`
 authToken=`echo "${response}" | grep "authToken" | awk '{print $3}'`
 
-req -H "authToken: ${authToken}" "${URL}/chart_data.csv"
-
 #TMP=`mktemp`
+
+req \
+	-H "authToken: ${authToken}" \
+	-o "${TMP}" \
+	"${URL}/chart_data.csv"
+
 #DAYSTR=`get_day "${TMP}"`
 #FILENAME="${CSV}/${DAYSTR}.csv.gz"
-#gzip -c "${TMP}" > "${FILENAME}"
+#compress_csv "${TMP}" "${FILENAME}"
 
 rm -rf "${COOKIES}"

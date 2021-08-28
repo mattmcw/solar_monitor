@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 mkdir -p tmp
 
@@ -21,7 +21,7 @@ perc () {
 }
 
 testmethod () {
-	gzip -c "${1}.${2}" > "${1}.${2}.gz"
+	compress_csv "${1}.${2}" "${1}.${2}.gz"
 	uncomp=`filesize "${1}.${2}"`
 	perc ${initial} ${uncomp} "${2}"
 	comp=`filesize "${1}.${2}.gz"`
@@ -32,7 +32,7 @@ for i in "./tmp/"*.csv ; do
 	initial=`filesize "${i}"`
 
 	# gzip 
-	gzip -c "${i}" > "${i}.gz"
+	compress_csv "${i}" "${i}.gz"
 	compressed=`filesize "${i}.gz"`
 	perc ${initial} ${compressed} "gzip"
 
@@ -53,4 +53,4 @@ for i in "./tmp/"*.csv ; do
 	testmethod "${i}" "${name}"
 done
 
-rm -rf tmp
+rm -rf tmp/*

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ "${1}" == "" ]]; then
+	echo "Please include first a command"
+	echo "Example: csv"
+	exit 1
+fi
+
+if [[ "${1}" == "csv" ]]; then
+	if [[ "${2}" == "get" ]]; then
+		bash ./src/csv/get "${3}"
+	fi
+fi
+

@@ -1,19 +1,9 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 # "Date","Volts(V)","Current(A)","Temperature(°C)","State Of Charge(%)"
 # "2021-08-16 00:00:00",52.352,-2.047,25,55
-
-col_or_null () {
-	res=`col "${@}"`
-	if [[ "${res}" == "" ]]; then
-		echo "NULL"
-		exit
-	else
-		echo "${res}"
-	fi
-}
 
 import_csv () {
 	while read row; do

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 FILEPATH=`pwd "${1}"`
 

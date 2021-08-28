@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ./common.sh
+source ./src/common.sh
 
 TWENTYFOURHOURS=86400
 NOW=`date "+%s"`
 LASTDAY=`echo "${NOW}-${TWENTYFOURHOURS}" | bc`
-QUERY=""
+QUERY="SELECT * FROM conextstate WHERE \
+	()	\
+	;"
