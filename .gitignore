@@ -1,5 +1,5 @@
-tmp
-data
+tmp/
+data/
 .env
 *.DS_Store
-csv
+./csv/
