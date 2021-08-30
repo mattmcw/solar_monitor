@@ -15,6 +15,10 @@ elif [[ "${1}" == "fona" ]]; then
 		sudo bash ./src/fona/on.sh
 	elif [[ "${2}" == "off" ]]; then
 		sudo bash ./src/fona/off.sh
+	elif [[ "${2}" == "send" ]]; then
+		bash ./src/fona/send.sh "${3}"
+	elif [[ "${2}" == "battery" ]]; then
+		bash ./src/fona/battery.sh
 	fi
 fi
 
