@@ -1,8 +1,9 @@
 #!/bin/bash
 
-RESPONSE=`bash ./src/fona/send.sh "AT+CBC"`
+RESPONSE=`bash ./src/fona/send.sh "AT+CBC" | grep "CBC:"`
 
-CHARGE=`echo "${RESPONSE}" | grep "CBC:" | awk -F',' '{print $2}'`
-VOLTAGE=`echo "${RESPONSE}" | grep "CBC:" | awk -F',' '{print $3}'`
+CHARGE=`echo "${RESPONSE}"  | awk -F',' '{print $2}'`
+VOLTAGE=`echo "${RESPONSE}" | awk -F',' '{print $3}'`
+VOLTAGE=`echo "scale=3;${VOLTAGE}/1000;" | bc`
 
-echo "${CHARGE}% [${VOLTAGE} mV]"
+echo "${CHARGE}\% [${VOLTAGE} V]"
