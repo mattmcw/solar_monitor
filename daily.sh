@@ -11,6 +11,12 @@ YESTERDAY=`yesterday`
 
 echo "Running daily script ${TODAY}..."
 
+lines_in_file example/2021-08-14.csv
+lines_in_file example/2021-08-16.csv
+
+echo "${CSV}/${TODAY}.csv.gz"
+echo "${CSV}/${YESTERDAY}.csv.gz"
+
 echo "Turning on FONA..."
 turnFonaOn
 echo "Turned on FONA."
@@ -23,11 +29,7 @@ echo "Connected FONA ppp."
 #sleep 10
 #
 
-lines_in_file example/2021-08-14.csv
-lines_in_file example/2021-08-16.csv
 
-echo "${CSV}/${TODAY}.csv.gz"
-echo "${CSV}/${YESTERDAY}.csv.gz"
 
 #sleep 10
 echo "Disconnecting FONA ppp..."
