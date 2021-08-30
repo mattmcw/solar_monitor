@@ -10,5 +10,11 @@ if [[ "${1}" == "csv" ]]; then
 	if [[ "${2}" == "get" ]]; then
 		bash ./src/csv/get "${3}"
 	fi
+elif [[ "${1}" == "fona" ]]; then
+	if [[ "${2}" == "on" ]]; then
+		sudo bash ./src/fona/on.sh
+	elif [[ "${2}" == "off" ]]; then
+		sudo bash ./src/fona/off.sh
+	fi
 fi
 
