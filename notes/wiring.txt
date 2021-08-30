@@ -1,0 +1,30 @@
+################
+## Breadboard ##
+################
+
+## FONA
+
+J1 = Bat
+J2 = GND
+J3 = +
+J4 = -
+J5 = Rst
+J6 = PS
+J7 = Key
+J8 = RI
+J9 = TX
+J10 = RX
+J11 = NS
+J12 = Vio
+
+J7 Key => F7 => GND G2
+
+
+## Raspberry Pi
+
+F2 Ground => GND J2
+F9 RX => TX J9
+F10 TX => RX J10
+F12 3.3 => Vio J12
+
+[TODO] 18 => Key J7
