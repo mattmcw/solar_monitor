@@ -22,6 +22,16 @@ J7 Key => F7 => GND G2
 
 ## Raspberry Pi
 
+Top of header.
+
+3.3 -- X 0 --
+    -- 0 0 --
+    -- 0 X -- GND
+    -- 0 X -- TX
+    -- 0 X -- RX
+    -- 0 X -- 18
+
+
 F2 Ground => GND J2
 F9 RX => TX J9
 F10 TX => RX J10
