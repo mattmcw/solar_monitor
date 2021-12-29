@@ -6,6 +6,6 @@ if [ ! -d data ]; then
 	mkdir -p data
 fi
 
-SETUP=`cat setup.sql`
+SETUP=`cat sql/setup.sql`
 
 db "${SETUP}"
