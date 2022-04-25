@@ -12,7 +12,7 @@ for day in $(seq 0 30); do
 	elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 		datetime=`TZ=$TZ date -d "+${day} day" "+%F"`
 	fi
-	bash generate_csv.sh "${datetime}" "./tmp/${datetime}.csv"
+	bash src/csv/generate.sh "${datetime}" "./tmp/${datetime}.csv"
 done
 
 perc () {
