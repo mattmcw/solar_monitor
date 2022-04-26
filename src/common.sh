@@ -7,6 +7,17 @@ fi
 
 source .env
 
+
+##########
+## NET  ##
+##########
+
+getIP () {
+	line=`ifconfig "${NETWORKDEVICE}" | grep "inet" | head -1`
+	ip=`echo "${line}" | awk '{print $2}'`
+	echo "${ip}"
+}
+
 ##########
 ## GPIO ##
 ##########
