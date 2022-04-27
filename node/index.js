@@ -99,6 +99,42 @@ app.post('/upload', upload.single('csv'), async function (req, res, next) {
 	return res.send(response)
 })
 
+app.post('/etc', upload.single('etc'), async function (req, res, next) {
+	let cmd = ""
+	let response = '0'
+
+	console.log(`/etc Received request`)
+	if (!req.file)
+	{
+		res.send(response)
+		console.log(`/etc no file`)
+		return next()
+	}
+
+	const originalname = basename(req.file.originalname)
+	const ext = extname(originalname.toLowerCase())
+	const fileName = `${+new Date()}_${originalname}`
+	const filePath = join('./uploads/', fileName)
+	const buffer = req.file.buffer
+
+	response = '1'
+
+	try {
+		await writeFile(filePath, buffer)
+	} catch (err) {
+		console.error(err)
+		response = '0'
+	}
+
+	try {
+		await s3.upload(originalname, buffer)
+	} catch (err) {
+		response = '0'
+	}
+
+	return res.send(response)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
