@@ -30,26 +30,33 @@ console.log(authConfig.users)
 app.use(helmet())
 app.use(basicAuth(authConfig))
 
+function getIP (req) {
+	return req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+}
+
 app.get('/script.sh', async function (req, res, next) {
+	const ip = getIP(req)
 	let script = ""
 	try {
 		script = await readFile('./etc/script.sh', 'utf8') 
 	} catch (err) {
 		//
 	}
+	console.log(`/script.sh GET ${ip}`)
 	res.send(script)
 	return next()
 });
 
 app.post('/upload', upload.single('csv'), async function (req, res, next) {
+	const ip = getIP(req)
 	let cmd = ""
 	let response = '0'
 
-	console.log(`/upload Received request`)
+	console.log(`/upload Received request ${ip}`)
 	if (!req.file)
 	{
 		res.send(response)
-		console.log(`/upload no file`)
+		console.log(`/upload No file ${ip}`)
 		return next()
 	}
 
@@ -59,7 +66,7 @@ app.post('/upload', upload.single('csv'), async function (req, res, next) {
 	const filePath = join('./uploads/', fileName)
 
 	if (extensions.indexOf(ext) == -1) {
-		console.log(`/upload ${ext} not acceptable extension`)
+		console.log(`/upload File ${ext} not acceptable extension ${ip}`)
 		res.send(response)
 		return next()
 	}
@@ -70,6 +77,7 @@ app.post('/upload', upload.single('csv'), async function (req, res, next) {
 
 	try {
 		await writeFile(filePath, buffer)
+		console.log(`/upload Wrote ${fileName} ${ip}`)
 	} catch (err) {
 		console.error(err)
 		response = '0'
@@ -100,14 +108,15 @@ app.post('/upload', upload.single('csv'), async function (req, res, next) {
 })
 
 app.post('/etc', upload.single('etc'), async function (req, res, next) {
+	
 	let cmd = ""
 	let response = '0'
 
-	console.log(`/etc Received request`)
+	console.log(`/etc Received request ${ip}`)
 	if (!req.file)
 	{
 		res.send(response)
-		console.log(`/etc no file`)
+		console.log(`/etc No file ${ip}`)
 		return next()
 	}
 
@@ -121,6 +130,7 @@ app.post('/etc', upload.single('etc'), async function (req, res, next) {
 
 	try {
 		await writeFile(filePath, buffer)
+		console.log(`/etc Wrote ${fileName} ${ip}`)
 	} catch (err) {
 		console.error(err)
 		response = '0'
