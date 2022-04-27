@@ -139,6 +139,15 @@ yesterday () {
 	fi
 }
 
+date_str () {
+		if [ "$(uname)" == "Darwin" ]; then
+		datetime=`TZ=$TZ date -j -v "+${day}d" "+%F"`
+	elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+		datetime=`TZ=$TZ date -d "+${day} day" "+%F"`
+	fi
+	echo ${datetime}
+}
+
 celsius2farenheit () {
 	echo "scale=2;( ${1} * 9/5) + 32" | bc
 }
