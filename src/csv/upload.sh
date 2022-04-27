@@ -2,7 +2,7 @@
 
 source ./src/common.sh
 
-FILEPATH=`pwd "${1}"`
+FILEPATH=`realpath "${1}"`
 PROTOCOL="http"
 if [ "${SSL}" == "1" ]; then
 	PROTOCOL="https"
@@ -12,5 +12,5 @@ URL="${PROTOCOL}://${REMOTE_USER}:${REMOTE_PASS}@${REMOTE}/upload"
 
 curl -v --interface "${NETWORKDEVICE}"\
 -A "${PI_UA}"\
---form csv=@${FILEPATH}\ 
+--form 'csv=@'${FILEPATH}\ 
 ${URL}
