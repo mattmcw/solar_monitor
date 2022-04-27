@@ -11,5 +11,6 @@ fi
 URL="${PROTOCOL}}://${REMOTE_USER}:${REMOTE_PASS}@${REMOTE}/upload"
 
 curl -v --interface "${NETWORKDEVICE}"\
+-A "${PI_UA}"\
 --form csv=@${FILEPATH}\ 
 ${URL}
